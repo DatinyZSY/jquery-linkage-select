@@ -7,7 +7,7 @@
 1. 初始化
 ```
 $(selector).linkage({
-	url: function/urlStr,// 如果数据是异步的
+	url: Function/urlString,// 如果数据是异步的,数据的请求地址，可以是字符串或生成url地址的函数
 	data: data, // 如果数据是同步的
 	/* 格式化data。
 	格式化后返回的数据形如[{value:XXX,text:XXX}]。其中value为option的value,text为option的显示文本。
