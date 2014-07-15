@@ -1,0 +1,43 @@
+{
+    "country": [{
+        "name": "异步妖精之国",
+        "id": 1
+    }, {
+        "name": "兽人之国",
+        "id": 2
+    }],
+    "prov": [{
+        "parent": 1,
+        "name": "异步窝窝省",
+        "id": 1
+    }, {
+        "parent": 1,
+        "name": "树人省",
+        "id": 2
+    }, {
+        "parent": 2,
+        "name": "木叶省",
+        "id": 3
+    }, {
+        "parent": 2,
+        "name": "暴走徒省",
+        "id": 4
+    }],
+    "city": [{
+        "parent": 1,
+        "name": "异步窝窝乡",
+        "id": 1
+    }, {
+        "parent": 1,
+        "name": "鸡窝乡",
+        "id": 2
+    }, {
+        "parent": 2,
+        "name": "未知1乡",
+        "id": 3
+    }, {
+        "parent": 4,
+        "name": "未知2乡",
+        "id": 4
+    }]
+}
