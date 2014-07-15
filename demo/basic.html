@@ -146,6 +146,70 @@
         });
 
         /* 异步数据 */
+        var url = 'data.json';
+        var citySelAysn = $('#citySelAysn').linkage({
+            url: url,
+            format: function(data, selectedVal) {
+            	data = data.city;
+                var formated = [];
+                data.forEach(function(each) {
+                    if (each.parent == selectedVal) {
+                        formated.push({
+                            value: each.id,
+                            text: each.name
+                        });
+                    }
+                });
+                return formated;
+            },
+            afterRender: function($sel) {
+                console.log('city rendered!', $sel);
+            }
+        });
+
+        var provSelAysn = $('#provSelAysn').linkage({
+            url: function(){
+            	return url + '?r=' + Math.random();
+            },
+            format: function(data, selectedVal) {
+            	data = data.prov;
+                var formated = [];
+                data.forEach(function(each) {
+                    if (each.parent == selectedVal) {
+                        formated.push({
+                            value: each.id,
+                            text: each.name
+                        });
+                    }
+                });
+                return formated;
+            },
+            afterRender: function($sel) {
+                console.log('prov rendered!', $sel);
+            },
+            next: citySelAysn
+
+        });
+
+        var countrySelAysn = $('#countrySelAysn').linkage({
+            url: url,
+            format: function(data) {
+            	data = data.country;
+                var formated = [];
+                data.forEach(function(each) {
+                    formated.push({
+                        value: each.id,
+                        text: each.name
+                    });
+                });
+                return formated;
+            },
+            afterRender: function($sel) {
+                console.log('country rendered!', $sel);
+            },
+            next: provSelAysn,
+            isRoot: true
+        });
     });
     </script>
 </body>

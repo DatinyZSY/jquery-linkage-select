@@ -110,7 +110,7 @@
             url: ajaxUrl,
             dataType: 'json'
         }).done(function(data) {
-            ctx.proccess(ctx, options.data);
+            ctx.proccess(ctx, data);
         });
     }
 
