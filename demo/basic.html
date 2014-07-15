@@ -1,23 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title></title>
+    <meta charset="UTF-8">
+    <title></title>
 </head>
+
 <body>
-	<script src="vendor/jquery-1.10.2.js"></script>
-	<script src="jquery-linkage-select.js"></script>
-	<script>
-	$.ready(function () {
-		var country = [{
-			name:'妖精之国',
-			id: 1
-		},{
-			name:'魔力之国',
-			id: 1
-		}];
-		// body...
-	});
-	</script>
+	<h2>同步</h2>
+    <div>
+        <label>国家</label>
+        <select id="countrySel"></select>
+    </div>
+    <div>
+        <label>省</label>
+        <select id="provSel"></select>
+    </div>
+    <div>
+        <label>市</label>
+        <select id="citySel"></select>
+    </div>
+	<h2>异步</h2>
+	<div>
+        <label>国家</label>
+        <select id="countrySelAysn"></select>
+    </div>
+    <div>
+        <label>省</label>
+        <select id="provSelAysn"></select>
+    </div>
+    <div>
+        <label>市</label>
+        <select id="citySelAysn"></select>
+    </div>
+
+    <script src="../vendor/jquery-1.10.2.js"></script>
+    <script src="../jquery-linkage-select.js"></script>
+    <script>
+    $(document).ready(function() {
+        var country = [{
+            name: '妖精之国',
+            id: 1
+        }, {
+            name: '兽人之国',
+            id: 2
+        }];
+
+        var prov = [{
+            parent: 1,
+            name: '窝窝省',
+            id: 1
+        }, {
+            parent: 1,
+            name: '树人省',
+            id: 2
+        }, {
+            parent: 2,
+            name: '木叶省',
+            id: 3
+        }, {
+            parent: 2,
+            name: '暴走徒省',
+            id: 4
+        }];
+
+        var cityData = [{
+            parent: 1,
+            name: '窝窝乡',
+            id: 1
+        }, {
+            parent: 1,
+            name: '鸡窝乡',
+            id: 2
+        }, {
+            parent: 2,
+            name: '未知1乡',
+            id: 3
+        }, {
+            parent: 4,
+            name: '未知2乡',
+            id: 4
+        }];
+
+        /* 同步数据 */
+        var citySel = $('#citySel').linkage({
+            data: cityData,
+            //valueKey, textKey
+            format: function(data, selectedVal) {
+                var formated = [];
+                data.forEach(function(each) {
+                    if (each.parent == selectedVal) {
+                        formated.push({
+                            value: each.id,
+                            text: each.name
+                        });
+                    }
+                });
+                return formated;
+            },
+            afterRender: function($sel) {
+                console.log('city rendered!', $sel);
+            }
+        });
+
+        var provSel = $('#provSel').linkage({
+            data: prov,
+            //valueKey, textKey
+            format: function(data, selectedVal) {
+                var formated = [];
+                data.forEach(function(each) {
+                    if (each.parent == selectedVal) {
+                        formated.push({
+                            value: each.id,
+                            text: each.name
+                        });
+                    }
+                });
+                return formated;
+            },
+            afterRender: function($sel) {
+                console.log('prov rendered!', $sel);
+            },
+            next: citySel
+
+        });
+
+        var countrySel = $('#countrySel').linkage({
+            data: country,
+            //valueKey, textKey
+            format: function(data) {
+                var formated = [];
+                data.forEach(function(each) {
+                    formated.push({
+                        value: each.id,
+                        text: each.name
+                    });
+                });
+                return formated;
+            },
+            afterRender: function($sel) {
+                console.log('country rendered!', $sel);
+            },
+            next: provSel,
+            isRoot: true
+        });
+
+        /* 异步数据 */
+    });
+    </script>
 </body>
+
 </html>
