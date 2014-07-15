@@ -19,8 +19,9 @@ $(selector).linkage({
         console.log('prov rendered!', $sel);
     },
     next: $(nextSel).linkage(options),// 联动的下一个框。
-    isRoot: Boolean// 是否是联动的第一个框。默认是false。
-    forceEmpty: Boolean//渲染select时，是否清空，默认为true
+    isRoot: Boolean,// 是否是联动的第一个框。默认是false。
+    forceEmpty: Boolean,//渲染select时，是否清空，默认为true
+    initOpt: '<option value="">不限</option>'// select的初始值
 });
 ```
 更多见[demo](./demo/basic.html)

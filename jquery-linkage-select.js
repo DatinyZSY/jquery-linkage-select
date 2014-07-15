@@ -74,7 +74,7 @@
         if ($.isFunction(options.format)) {
             formatData = options.format(data, selectedVal);
         }
-        ctx.render(ctx.el, formatData, options.forceEmpty, options.afterRender);
+        ctx.render(ctx.el, formatData, ctx);
         ctx.proccessNext(ctx);
     };
 
@@ -118,8 +118,12 @@
         return this.options;
     };
 
-    Plugin.prototype.render = function($sel, data, forceEmpty, afterRender) {
+    Plugin.prototype.render = function($sel, data, ctx) {
         var self = this;
+        var options = ctx.options;
+        var forceEmpty = options.forceEmpty;
+        var afterRender = options.afterRender;
+        var initOpt = options.initOpt;
         if (!$.isArray(data)) {
             console.error('data should be array');
             return;
@@ -128,6 +132,9 @@
             $sel.empty();
         }
         var opts = [];
+        if(initOpt){
+        	opts.push(initOpt);
+        }
         data.forEach(function(each) {
             opts.push(self._makeOptStr(each.value, each.text));
         });
