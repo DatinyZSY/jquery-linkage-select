@@ -138,7 +138,7 @@
         data.forEach(function(each) {
             opts.push(self._makeOptStr(each.value, each.text));
         });
-        $sel.html(opts.join());
+        $sel.html(opts.join(''));
         if ($.isFunction(afterRender)) {
             afterRender($sel);
         }
