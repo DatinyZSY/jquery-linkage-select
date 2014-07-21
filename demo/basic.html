@@ -33,6 +33,7 @@
         <label>市</label>
         <select id="citySelAysn"></select>
     </div>
+    <button id="change-data-btn">根据根据给定的国家，省的id来赋值</button>
 
     <script src="../vendor/jquery-1.10.2.js"></script>
     <script src="../jquery-linkage-select.js"></script>
@@ -210,6 +211,13 @@
             },
             next: provSelAysn,
             isRoot: true
+        });
+
+        var val = [2,4,4];
+        $('#change-data-btn').click(function(){
+            $('#countrySelAysn').val(val[0]).change();
+            countrySelAysn.setNextVal(val[1]);
+            provSelAysn.setNextVal(val[2]);
         });
     });
     </script>

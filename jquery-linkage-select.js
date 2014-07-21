@@ -34,6 +34,7 @@
         var options = this.options;
         var formatData;
         var self = this;
+        this.el = $(this.el);
         if (this.el.length === 0) {
             console.error('not find el!!!');
             return;
@@ -63,6 +64,11 @@
         	});
         }
 
+    };
+
+    // 只会被设置一次，设置后会重置
+    Plugin.prototype.setNextVal = function(val){
+        this.nextVal = val;
     };
 
     Plugin.prototype.proccess = function(ctx, data) {
@@ -139,6 +145,10 @@
             opts.push(self._makeOptStr(each.value, each.text));
         });
         $sel.html(opts.join(''));
+        if(ctx.before && ctx.before.nextVal){
+            $sel.val(ctx.before.nextVal);
+            ctx.before.nextVal = false;// 设置一次
+        }
         if ($.isFunction(afterRender)) {
             afterRender($sel);
         }
