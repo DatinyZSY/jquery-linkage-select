@@ -58,10 +58,10 @@
 
         if(options.next){
             options.next.before = this;
-        	// 联动
-        	this.el.change(function(){
-        		self.proccessNext(self);
-        	});
+            // 联动
+            this.el.change(function(){
+                self.proccessNext(self);
+            });
         }
 
     };
@@ -101,7 +101,7 @@
     };
 
     Plugin.prototype.sendAjax = function(ctx) {
-    	var selectedVal;
+        var selectedVal;
         if (ctx.before) {
             selectedVal = ctx.before.el.val();
         }
@@ -111,6 +111,9 @@
             ajaxUrl = options.url(selectedVal);
         } else {
             ajaxUrl = options.url;
+        }
+        if(!ajaxUrl){//如果是false的话，退出
+            return;
         }
         $.ajax({
             url: ajaxUrl,
@@ -139,7 +142,7 @@
         }
         var opts = [];
         if(initOpt){
-        	opts.push(initOpt);
+            opts.push(initOpt);
         }
         data.forEach(function(each) {
             opts.push(self._makeOptStr(each.value, each.text));
